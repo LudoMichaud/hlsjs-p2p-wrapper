@@ -14,7 +14,10 @@ class PeerAgentMock {
             xhr.onreadystatechange = (e) => {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200 || xhr.status === 206) {
-                        onSuccess(xhr.response);
+                        let stats = {
+                            cdnDownloaded: xhr.response.byteLength
+                        };
+                        onSuccess(xhr.response, stats);
                     } else {
                         onError(e);
                     }
